@@ -1,5 +1,6 @@
 package com.smackchat.juansandoval.smackchat
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,7 +13,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loginCreateUserBtnClick(view: View) {
-
+        val createUserIntent = Intent(this, CreateUserActivity::class.java)
+        startActivity(createUserIntent)
     }
 
     fun loginBtnClick(view: View) {
