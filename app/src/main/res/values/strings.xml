@@ -2,4 +2,10 @@
     <string name="app_name">Smack Chat</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="smackchat">smackchat</string>
+    <string name="smack_chat">Smack Chat</string>
 </resources>
