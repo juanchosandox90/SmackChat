@@ -14,4 +14,10 @@
     <string name="create_account">Create Account</string>
     <string name="already_a_member_login">Already a member? Login</string>
     <string name="tap_to_generate_user_avatar">Tap to generate user avatar</string>
+    <string name="error_toast">Something went wrong, please try again</string>
+    <string name="error_fields_empty_toast">Make sure username, email and password are filled in</string>
+    <string name="logout">Logout</string>
+    <string name="email_logged">juansandoval222@gmail.com</string>
+    <string name="name_logged">Juan Sandoval</string>
+    <string name="log_out">Loggin out</string>
 </resources>
