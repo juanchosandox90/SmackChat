@@ -3,19 +3,18 @@ package com.smackchat.juansandoval.smackchat.controller
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.LocalBroadcastManager
 import android.view.View
 import android.widget.Toast
 import com.smackchat.juansandoval.smackchat.R
 import com.smackchat.juansandoval.smackchat.services.AuthService
-import com.smackchat.juansandoval.smackchat.utils.BROADCAST_USER_DATA_CHANGE
+import com.smackchat.juansandoval.smackchat.utils.*
 import kotlinx.android.synthetic.main.activity_create_user.*
 import java.util.*
 
 class CreateUserActivity : AppCompatActivity() {
 
-    var userAvar = "profileDefault"
-    var userAvatarColor = "[0.5, 0.5, 0.5, 1]"
+    var userAvar = USER_AVATAR_DEFAULT
+    var userAvatarColor = USER_DRAWABLE_COLOR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +34,13 @@ class CreateUserActivity : AppCompatActivity() {
                 if (registerSuccess) {
                     AuthService.loginUser(this, email, password) { loginSuccess ->
                         if (loginSuccess) {
-                            AuthService.createUser(this, userName, email, userAvar, userAvatarColor) { createUserSucces ->
-                                if (createUserSucces) {
-                                    enableSpinner(false)
-                                    val userDataChange = Intent(BROADCAST_USER_DATA_CHANGE)
-                                    LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
+                            AuthService.createUser(this, userName, email, userAvar, userAvatarColor) { createUserSuccess ->
+                                if (createUserSuccess) {
                                     val mainActivityIntent = Intent(this, MainActivity::class.java)
+                                    mainActivityIntent.putExtra(EXTRA_USERNAME, userName)
+                                    mainActivityIntent.putExtra(EXTRA_EMAIL, email)
                                     startActivity(mainActivityIntent)
-                                    finish()
+                                    enableSpinner(false)
                                 } else {
                                     errorToast()
                                 }
@@ -66,12 +64,12 @@ class CreateUserActivity : AppCompatActivity() {
         val avatar = random.nextInt(28)
 
         if (color == 0) {
-            userAvar = "light$avatar"
+            userAvar = USER_LIGHT_AVATAR + "$avatar"
         } else {
-            userAvar = "dark$avatar"
+            userAvar = USER_DARK_AVATAR + "$avatar"
         }
 
-        val resourceId = resources.getIdentifier(userAvar, "drawable", packageName)
+        val resourceId = resources.getIdentifier(userAvar, DRAWABLE_RESOURCE, packageName)
         createAvatarImageView.setImageResource(resourceId)
     }
 
